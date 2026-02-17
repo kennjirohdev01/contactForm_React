@@ -1,0 +1,223 @@
+body{
+    background-color: cadetblue;
+    font-family: sans-serif;
+}
+
+body h1{
+    color: white;
+    text-align: center;
+}
+
+form{
+
+    max-width: 600px;
+    margin : 0 auto;
+    padding : 20px;
+
+    background-color:white;
+    border-radius: 8px;
+}
+
+form div{
+    margin-bottom: 15px;
+    display: flex;       /* 子要素を横並びにする */
+    align-items: center; /* 上下の位置を中央揃えに */
+}
+
+body label{
+    font-size: 20px;
+    width:200px;
+    margin-right:10px;
+    flex-shrink: 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="data"],
+form textarea{
+    flex:1;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+form select{
+    height: 40px;
+    font-size:16px;
+}
+
+#message{
+    height: 100px;
+    resize: vertical;
+}
+
+div button{
+    font-size: 18px;
+
+    width:100%;
+
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div button:hover{
+    background-color: #0056b3;
+}
+form div:has(textarea){
+    align-items: flex-start;
+}
+.admin-link{
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.admin-link button{
+    font-size: 18px;
+    width: 100%;
+    padding: 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.admin-link button:hover {
+    background-color: #5a6268;
+}
+
+/* プルダウンを横並びにするための簡単なCSS */
+.date-select-wrapper {
+    display: flex;
+    gap: 10px; /* プルダウン間の隙間 */
+    align-items: center;
+}
+.date-select-wrapper select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* =========================================
+   住所検索フォーム用の追加スタイル
+   ========================================= */
+
+/* 住所エリア全体を少し区切って見やすくする */
+.address-form-container {
+    background-color: #f2f2f2; /* 薄いグレーの背景 */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;       /* 下の要素との隙間 */
+    
+    /* 既存の 'form div' の設定（横並び）を打ち消して、縦積みにする */
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: stretch; /* 横幅いっぱいに広げる */
+}
+
+/* 住所エリア内の各行設定 */
+/* ⚠️重要: 既存の 'form div' セレクタよりも優先度を高くして上書きします */
+.address-form-container .form-group {
+    display: flex;
+    flex-direction: column; /* ここだけ「ラベルを上、入力欄を下」にする */
+    align-items: flex-start; /* 左寄せ */
+    margin-bottom: 15px;
+}
+
+/* 住所エリア内のラベル設定 */
+.address-form-container label {
+    width: auto;      /* 既存の 'width: 200px' をリセット */
+    font-size: 14px;  /* 少し小さめにして情報の階層をつける */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* 住所エリア内の入力欄 */
+.address-form-container input[type="text"] {
+    width: 100%; /* 横幅いっぱいにする */
+}
+
+/* 郵便番号とボタンのラッパー */
+/* ここだけは横並び（Row）に戻します */
+.zipcode-wrapper {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    width: 100%;
+}
+
+/* 郵便番号入力欄の幅調整 */
+.zipcode-wrapper input[type="text"] {
+    flex: none;   /* 自動伸縮させない */
+    width: 150px; /* 固定幅 */
+}
+
+/* 住所検索ボタン */
+#searchBtn {
+    width: auto;      /* 親の幅いっぱいにしない */
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #28a745; /* 緑色にして「送信」ボタンと区別 */
+}
+#searchBtn:hover {
+    background-color: #218838;
+}
+
+/* エラーメッセージ */
+.error-text {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block; /* 改行させる */
+}
+
+/* 入力欄とエラーメッセージを縦積みにするラッパー */
+.input-group-vertical {
+    flex: 1;                /* 親のFlex内で余った幅を全て使う */
+    display: flex;          /* この中もFlexboxにする */
+    flex-direction: column; /* ただし、この中は「縦並び」にする */
+    width: 100%;            /* 幅を確保 */
+}
+.input-group-vertical textarea {
+    width: 100%;
+}
+
+/* 無効化されたボタンのスタイル */
+button:disabled {
+    background-color: #cccccc; /* グレーにする */
+    color: #666666;            /* 文字も薄く */
+    cursor: not-allowed;       /* マウスカーソルを「駐車禁止」マークに */
+    opacity: 0.7;              /* 全体を少し透明に */
+}
+
+/* 無効化時はホバーしても色を変えない（重要） */
+button:disabled:hover {
+    background-color: #cccccc; /* 通常時と同じ色 */
+}
+
+/* トースト通知のスタイル */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745; /* 成功時の緑色 */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-weight: bold;
+    z-index: 1000; /* 最前面に表示 */
+
+    /* ふわっと消えるアニメーション (合計4秒) */
+    /* fadeOutというアニメーションを、3秒待ってから1秒かけて実行 */
+    animation: fadeOut 1s ease 3s forwards;
+}
+
+/* アニメーション定義 */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+}
