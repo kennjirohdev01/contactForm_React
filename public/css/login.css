@@ -1,0 +1,93 @@
+/* public/css/login.css */
+
+/* 画面全体を覆って、style.css の青色背景を隠す */
+.login-page-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* ログインの白い箱 (※重複していたので1つにまとめました) */
+.login-container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.login-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* ⚠️ style.css の form div (横並び) を打ち消す */
+.login-container form div.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* ⚠️ style.css の label (幅200px) を打ち消す */
+.login-container .input-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    width: auto;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ⚠️ 修正箇所:
+  style.css に負けないように「type属性」まで指定して詳細度を上げます。
+  これで確実にメールアドレスとパスワードの両方が同じサイズになります。 
+*/
+.login-container .input-group input[type="email"],
+.login-container .input-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    flex: none;
+}
+
+.login-container .login-btn {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-container .login-btn:hover {
+    background: #0056b3;
+}
+
+/* エラーメッセージ用の余白 */
+.login-container .error-text {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ボタンを囲むdiv用の余白 */
+.login-container .submit-group {
+    margin-top: 20px;
+}

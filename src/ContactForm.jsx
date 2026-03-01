@@ -1,5 +1,5 @@
 import { use, useState } from 'react'
-import { Link, UNSAFE_ErrorResponseImpl } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ContactForm() {
   //--- useStateの定義 --------
@@ -21,6 +21,9 @@ function ContactForm() {
 
   // バリデーションエラーを管理するState
   const [errors, setErrors] = useState({});
+
+  // 画面遷移用の関数を取得
+  const navigate = useNavigate();
 
   // 現在の年を取得
   const currentYear = new Date().getFullYear();
@@ -81,7 +84,7 @@ function ContactForm() {
     return input.checkValidity();
   }
   // 送信時の処理 & バリデーション
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();       // フォームのデフォルト送信(リロード)をキャンセル
 
     // バリデーションロジック
@@ -119,10 +122,44 @@ function ContactForm() {
 
     // エラーをStateにセット
     setErrors(newErrors);
+    console.log("バリデーションチェックOK。送信します。");
 
     if (isValid) {
-      // ここにAPI送信処理を書く
-      console.log("バリデーションチェックOK。送信します。");
+      // API送信処理
+      try {
+        // 送信データをJSONオブジェクトにまとめる
+        const payload = {
+          user_name: name,
+          user_email: email,
+          user_message: message,
+          user_birthday: birthYear && birthMonth && birthDay ? `${birthYear}-${birthMonth}-${birthDay}` : '',
+          user_zipcode: zipcode,
+          user_prefecture: prefecture,
+          user_city: city,
+          user_street: street
+        };
+
+        // fetchでAPIへ送信
+        // プロキシを通す
+        const response = await fetch('/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        // レスポンスの確認
+        if (response.ok || response.redirected) {
+          navigate('/complete');
+        } else {
+          console.error("サーバーエラー", response.status);
+          alert("送信に失敗しました。時間をおいて再度お試しください。");
+        }
+      } catch (e) {
+        console.error("通信エラー", e);
+        alert("通信エラーが発生しました。");
+      }
     }
   };
 
@@ -135,13 +172,15 @@ function ContactForm() {
       <form id="contactForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">お名前:</label>
-          <input
-            type="text"
-            id="name"
-            name="user_name"
-            value={name}
-            onChange={(e) => setName(e.target.value)} />
-          {errors.name && <div className="error-text">{errors.name}</div>}
+          <div className='input-group-vertical'>
+            <input
+              type="text"
+              id="name"
+              name="user_name"
+              value={name}
+              onChange={(e) => setName(e.target.value)} />
+            {errors.name && <div className="error-text">{errors.name}</div>}
+          </div>
         </div>
 
         <div>
@@ -252,14 +291,16 @@ function ContactForm() {
         {/* メールアドレス */}
         <div>
           <label htmlFor="email">メールアドレス:</label>
-          <input
-            type="email"
-            id="email"
-            name="user_email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <div className="error-text">{errors.email}</div>}
+          <div className="input-group-vertical">
+            <input
+              type="email"
+              id="email"
+              name="user_email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <div className="error-text">{errors.email}</div>}
+          </div>
         </div>
 
         {/* お問い合わせ内容 */}
@@ -283,7 +324,7 @@ function ContactForm() {
 
       {/* 管理者画面リンク */}
       <div className="admin-link">
-        <Link to="/admin">管理者画面</Link>
+        <Link to="/login">管理者画面</Link>
       </div>
     </div>
   )
