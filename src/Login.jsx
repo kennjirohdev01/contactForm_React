@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -68,6 +68,9 @@ function Login() {
                         <button type="submit" className="login-btn">ログイン</button>
                     </div>
                 </form>
+                <div className="back-link">
+                    <Link to="/">お問い合わせフォームへ戻る</Link>
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,150 @@
+/* public/css/adminstyle.css */
+
+.admin-page-wrapper {
+    padding: 20px;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.admin-page-wrapper h1 {
+    color: #333;
+    text-align: left;
+}
+
+.admin-header-links {
+    margin-bottom: 20px;
+}
+
+.admin-header-links span {
+    margin: 0 10px;
+}
+
+.logout-btn {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 16px;
+    padding: 0;
+    width: auto;
+}
+
+.logout-btn:hover {
+    background: none;
+    color: darkred;
+}
+
+/* 管理者追加フォーム */
+/* 管理者追加セクション全体 */
+.admin-page-wrapper .admin-add-section {
+    margin: 20px 0;
+    padding: 20px;
+    /* 少し広めに */
+    background-color: #f0f8ff;
+    border: 1px solid #b0c4de;
+    border-radius: 5px;
+}
+
+.admin-page-wrapper .admin-add-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    /* 余白調整 */
+    font-size: 18px;
+    color: #333;
+}
+
+/* ★ form全体のコンテナ: 縦並びにする */
+.admin-page-wrapper .admin-add-form {
+    display: flex;
+    flex-direction: column;
+    /* メール行とパスワード行を縦に並べる */
+    gap: 10px;
+    /* 行間の隙間 */
+    max-width: 500px;
+    /* フォーム全体の最大幅を少し制限 */
+}
+
+/* ★ 各行のコンテナ */
+.admin-page-wrapper .form-row {
+    width: 100%;
+}
+
+/* 入力欄の共通スタイル */
+.admin-page-wrapper .admin-add-section input {
+    padding: 10px;
+    /* 少し広く */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* paddingを含めた幅計算 */
+}
+
+/* ★ メールアドレス入力欄 (横幅いっぱい) */
+.admin-page-wrapper .email-row input {
+    width: 100%;
+}
+
+/* ★ パスワードとボタンの行: 横並びにする */
+.admin-page-wrapper .password-btn-row {
+    display: flex;
+    flex-direction: row;
+    /* パスワードとボタンを横に並べる */
+    gap: 10px;
+    /* 入力欄とボタンの隙間 */
+    align-items: center;
+    /* 縦方向の中央寄せ */
+}
+
+/* ★ パスワード入力欄 (ボタンの横幅を引いた残りを埋める) */
+.admin-page-wrapper .password-btn-row input {
+    flex: 1;
+    /* 可能な限り広がる */
+    margin-right: 0;
+    /* 以前の横並び用マージンをリセット */
+}
+
+/* 追加ボタン */
+.admin-page-wrapper .admin-add-section button {
+    padding: 10px 20px;
+    /* 少し広く */
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    /* 以前の幅設定をリセット */
+    width: auto;
+    flex-shrink: 0;
+    /* ボタンが縮まないように */
+}
+
+.admin-page-wrapper .admin-add-section button:hover {
+    background-color: #218838;
+}
+
+/* テーブルスタイル */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: rgb(241, 165, 65);
+    font-weight: bold;
+    color: black;
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

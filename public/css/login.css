@@ -7,7 +7,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #f0f2f5;
+    background-color: cadetblue;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,4 +90,28 @@
 /* ボタンを囲むdiv用の余白 */
 .login-container .submit-group {
     margin-top: 20px;
+}
+
+/* =========================================
+   戻るリンク用のデザイン
+   ========================================= */
+.login-container .back-link {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.login-container .back-link a {
+    color: #6c757d;
+    /* 落ち着いたグレー色 */
+    text-decoration: none;
+    /* 下線を消す */
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.login-container .back-link a:hover {
+    text-decoration: underline;
+    /* マウスを乗せたら下線を出す */
+    color: #343a40;
+    /* 少し濃い色にする */
 }
