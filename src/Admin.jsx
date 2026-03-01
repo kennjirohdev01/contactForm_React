@@ -4,12 +4,11 @@ import { useNavigate, Link } from 'react-router-dom';
 const Admin = () => {
     const [contacts, setContacts] = useState([]);
     const [newAdminEmail, setNewAdminEmail] = useState('');
-    const [newAdminPassword, setNewAdminPassword] = useState(''); // ここはPassword
+    const [newAdminPassword, setNewAdminPassword] = useState('');
 
     const navigate = useNavigate();
 
     // 日付をYYYY/MM/DD HH:MM:SS に整形する関数
-    // 引数名を includeTime (大文字のT) に修正
     const formatDate = (dateString, includeTime = false) => {
         if (!dateString) {
             return '';
@@ -20,7 +19,6 @@ const Admin = () => {
         }
 
         const yyyy = d.getFullYear();
-        // getMonth() に修正
         const mm = ('00' + (d.getMonth() + 1)).slice(-2);
         const dd = ('00' + d.getDate()).slice(-2);
         let str = `${yyyy}/${mm}/${dd}`;
@@ -36,12 +34,11 @@ const Admin = () => {
 
     // 画面が開かれた瞬間に1度だけ実行される処理(データの取得)
     useEffect(() => {
-        // 関数全体を try...catch で囲む形に修正
         const fetchContacts = async () => {
             try {
                 const response = await fetch('/api/contacts');
 
-                if (response.status === 401) { // === を推奨
+                if (response.status === 401) {
                     navigate('/login');
                     return;
                 }
@@ -60,9 +57,8 @@ const Admin = () => {
     }, [navigate]);
 
     // 管理者追加ボタンが押された時の処理
-    // 関数名を handleAddAdmin に修正
     const handleAddAdmin = async (e) => {
-        e.preventDefault(); // preventDefault に修正
+        e.preventDefault();
         try {
             const response = await fetch('/api/admin/users', {
                 method: 'POST',
@@ -122,8 +118,8 @@ const Admin = () => {
                     <input
                         type="password"
                         placeholder="パスワード"
-                        value={newAdminPassword} /* newAdminPass から修正 */
-                        onChange={(e) => setNewAdminPassword(e.target.value)} /* setNewAdminPass から修正 */
+                        value={newAdminPassword}
+                        onChange={(e) => setNewAdminPassword(e.target.value)}
                         required
                     />
                     <button type="submit">追加</button>
@@ -145,7 +141,7 @@ const Admin = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* contacts配列の中身をループして、<tr>タグを量産する */}
+                    {/* contacts配列の中身をmapでループ */}
                     {contacts.map(contact => (
                         <tr key={contact.id}>
                             <td>{contact.id}</td>
